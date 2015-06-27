@@ -46,8 +46,8 @@ class ofApp : public ofBaseApp{
 		bool collide = false;
 		float blockSize = 400;
 		int chunk = 16;
-		int bit = 8;
-		float speed = .7;
+		int bit = 12;
+		float speed = 1;
 		float gravity = 1.3;
 		ofCamera cam;
 
@@ -60,7 +60,7 @@ class ofApp : public ofBaseApp{
 		bool shoot;
 		bool jump;
 		bool boing;
-		int timer = 20;
+		int timer = 30;
 
 		ofColor dirt = ofColor(0,255,0);
 		ofColor sky = ofColor(0,0,255);

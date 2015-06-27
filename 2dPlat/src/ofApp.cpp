@@ -76,7 +76,7 @@ void ofApp::update(){
 
     ofVec3f q(0,-90 + rotation,0);
     cam.setOrientation(q);
-    cam.setPosition(x,y,z);
+    cam.setPosition(x,y+5,z);
     sun.setPosition(x,y,200);
 
     for (std::vector<Blocks>::iterator it = b.begin() ; it != b.end(); ++it) {
@@ -99,28 +99,60 @@ void ofApp::update(){
             std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
         }*/
 
-        if(x<it->x+(bit/2) && x> it->x-(bit/2) && y-5<it->y+(bit/2) && y-5> it->y-(bit/2)){
-            std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+        if(x+8<it->x+(bit/2) && x+8> it->x-(bit/2) && y-5<it->y+(bit/2) && y-5> it->y-(bit/2)){
             y = oy;
             collide = true;
         }
+        if(x<it->x+(bit/2) && x> it->x-(bit/2) && y-5<it->y+(bit/2) && y-5> it->y-(bit/2)){
+            y = oy;
+            collide = true;
+        }
+        if(x-8<it->x+(bit/2) && x-8> it->x-(bit/2) && y-5<it->y+(bit/2) && y-5> it->y-(bit/2)){
+            y = oy;
+            collide = true;
+        }
+
+        if(x+8<it->x+(bit/2) && x+8> it->x-(bit/2) && y+5<it->y+(bit/2) && y+5> it->y-(bit/2)){
+            y = oy;
+            timer = 0;
+        }
+        if(x<it->x+(bit/2) && x> it->x-(bit/2) && y+5<it->y+(bit/2) && y+5> it->y-(bit/2)){
+            y = oy;
+            timer = 0;
+        }
+        if(x-8<it->x+(bit/2) && x-8> it->x-(bit/2) && y+5<it->y+(bit/2) && y+5> it->y-(bit/2)){
+            y = oy;
+            timer = 0;
+        }
+
+
         if(x+8<it->x+(bit/2) && x+8> it->x-(bit/2) && y<it->y+(bit/2) && y> it->y-(bit/2)){
-            std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
             x = ox;
         }
         if(x-8<it->x+(bit/2) && x-8> it->x-(bit/2) && y<it->y+(bit/2) && y> it->y-(bit/2)){
-            std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+            x = ox;
+        }
+
+
+        if(x+8<it->x+(bit/2) && x+8> it->x-(bit/2) && y+5<it->y+(bit/2) && y+5> it->y-(bit/2)){
+            x = ox;
+        }
+        if(x-8<it->x+(bit/2) && x-8> it->x-(bit/2) && y+5<it->y+(bit/2) && y+5> it->y-(bit/2)){
             x = ox;
         }
 
     }
     if(collide == true && jump == true){
-        timer = 20;
-        gravity = -2;
+        timer = 30;
+        boing = true;
         collide = false;
     }
     if(timer <= 0){
-        gravity = 1.3;
+        gravity = 2.3;
+        boing = false;
+    }
+    if(boing == true){
+        gravity = -timer/5;
     }
     timer -= 1;
 
